@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const Sequelize = require('sequelize');
-//const sequelize = new Sequelize('mysql://user:pass@host:port/database');
+//const myDatabase = new Sequelize('mysql://user:pass@host:port/database');
 const server = express();
 
 server.use(bodyParser.json());
@@ -18,10 +18,35 @@ function miMiddleware(req, res, next) {
 }
 
 /** Middleware para ruta específica */
-server.post('/ejemplo', miMiddleware, (req, res) =>{
+server.get('/ejemplo', miMiddleware, (req, res) =>{
     res.json('Todo ok!');
 });
 
+/** Artículos */
+
+server.get('/articulos', (req, res) =>{
+    res.json('Artículos');
+});
+
+server.get('/articulos', (req, res) =>{
+    res.json('Artículos');
+});
+
+/** Pedidos */
+
+server.get('/pedidos', (req, res) =>{
+    res.json('Pedidos');
+});
+
+/** Usuarios */
+
+server.get('/usuarios', (req, res) =>{
+    res.json('Todos los usuarios');
+});
+
+server.get('/usuarios/:idUsuario', (req, res) =>{
+    res.json('Usuario con un id determinado');
+});
 
 
 
