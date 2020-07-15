@@ -16,12 +16,12 @@ server.use('/users', usersRoutes);
 /** Middlewares */
 server.use(bodyParser.json());
 
-server.use((err, req, res, next) => {
-    if(!err) return next();
+// server.use((err, req, res, next) => {
+//     if(!err) return next();
 
-    console.log('Error, algo salió mal', err);
-    res.status(500).send('Error');
-});
+//     console.log('Error, algo salió mal', err);
+//     res.status(500).send('Error');
+// });
 
 /** Server */
 server.listen(3000, () => {

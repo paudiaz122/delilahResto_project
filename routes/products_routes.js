@@ -1,16 +1,12 @@
 const express = require('express');
+const router = express.Router();
+const userControllers = require('../controllers/users_controllers');
+const productControllers = require('../controllers/products_controllers');
+const productMiddlewares = require('../middlewares/products_middlewares');
 
-//POSTS
-server.post('/products', (req, res) =>{
-    res.json('Agrego un producto');
-});
+router.get('/products', productControllers.getProductsData);
+router.post('/products', userControllers.validateAdminUser, productMiddlewares.requireProductData, productControllers.newProduct);
+router.put('/products/:idProduct', userControllers.validateAdminUser, productMiddlewares.requireProductData, productControllers.modifyProduct);
+router.delete('/products/:idProduct', userControllers.validateAdminUser, productMiddlewares.requireProductData, productControllers.deleteProduct);
 
-//GETS
-server.get('/products', (req, res) =>{
-    res.json('Obtengo todos los productos');
-});
-
-//PATCHS
-server.patch('/products/:idProduct', (req, res) =>{
-    res.json('Modifico un producto');
-});
+module.exports = router;

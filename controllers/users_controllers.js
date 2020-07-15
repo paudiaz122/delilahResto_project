@@ -1,5 +1,10 @@
+const JWT = require('jsonwebtoken');
+const JWTSign = 'mySUPERpass.12';
+const users_controllers = {};
+let lastId = 0;
+
 /** Midlewares controladores */
-const validarCredencialesUsuario = (req, res, next) => {
+users_controllers.validateUserCredentials = (req, res, next) => {
     const usuario = req.body;
     const existeUsuario = users.find(user => user.email === usuario.email && user.password === usuario.password);
 
@@ -12,7 +17,11 @@ const validarCredencialesUsuario = (req, res, next) => {
     }
 };
 
-const validarUsuarioAdministrador = (req, res, next) => {
+users_controllers.registerUser = (req, res, next) => {
+
+};
+
+users_controllers.validateAdminUser = (req, res, next) => {
     try {
         const auth = req.headers.authorization;
         console.log(req.headers)
@@ -32,3 +41,5 @@ const validarUsuarioAdministrador = (req, res, next) => {
         });
     }
 };
+
+module.exports = users_controllers;
