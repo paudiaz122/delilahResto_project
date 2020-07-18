@@ -1,8 +1,5 @@
+const projectDatabase = require('../config/database');
 const orders_controllers = {};
-
-orders_controllers.getMyOrdersData = (req, res, next) => {
-
-};
 
 orders_controllers.newOrder = (req, res, next) => {
 

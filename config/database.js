@@ -1,25 +1,20 @@
 const { Sequelize } = require('sequelize');
-const { values } = require('sequelize/types/lib/operators');
-const projectDatabase = new Sequelize('delilaResto', 'root', '', {
+const sequelize = new Sequelize('delilahResto', 'root', '', {
     host: 'localhost',
     dialect: 'mysql',
     define: {
         timestamps: false,
     },
-    logging: false,
+    logging: true,
     typeValidation: true
 });
 
-projectDatabase.authenticate()
-  .then(err => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(err => {
-    console.log('Unable to connect to the database:', err);
-  });
+sequelize.sync({
+  force: true
+});
 
-const usersModel = projectDatabase.define('Users', {
-  userId: {
+const usersModel = sequelize.define('users', {
+  id: {
     type: Sequelize.INTEGER,
     allowNull: false,
     unique: true,
@@ -57,17 +52,13 @@ const usersModel = projectDatabase.define('Users', {
   }
 });
 
-const ordersModel = projectDatabase.define('Orders', {
-  orderId: {
+const ordersModel = sequelize.define('orders', {
+  id: {
     type: Sequelize.INTEGER,
     allowNull: false,
     unique: true,
     primaryKey: true,
     autoIncrement: true
-  },
-  userId: {
-    type: Sequelize.TEXT,
-    allowNull: false
   },
   totalPrice: {
     type: Sequelize.FLOAT,
@@ -93,8 +84,8 @@ const ordersModel = projectDatabase.define('Orders', {
   }
 });
 
-const productsModel = projectDatabase.define('Orders', {
-  productsId: {
+const productsModel = sequelize.define('products', {
+  id: {
     type: Sequelize.INTEGER,
     allowNull: false,
     unique: true,
@@ -123,22 +114,14 @@ const productsModel = projectDatabase.define('Orders', {
   }
 });
 
-const ordersProductsModel = projectDatabase.define('Orders', {
-  orderProductId: {
+const ordersProductsModel = sequelize.define('ordersProducts', {
+  id: {
     type: Sequelize.INTEGER,
     allowNull: false,
     unique: true,
     primaryKey: true,
     autoIncrement: true
   },
-  // orderId: {
-  //   type: Sequelize.INTEGER,
-  //   allowNull: false
-  // },
-  // productId: {
-  //   type: Sequelize.INTEGER,
-  //   allowNull: false
-  // },
   productQuantity: {
     type: Sequelize.INTEGER,
     allowNull: false
@@ -153,14 +136,13 @@ const ordersProductsModel = projectDatabase.define('Orders', {
   }
 });
 
-ordersModel.hasMany(usersModel, {foreignKey: 'userId'});
-usersModel.belongsTo(ordersModel, {foreignKey: 'userId'});
+ordersModel.belongsTo(usersModel, {foreignKey: 'userId'});
 
 ordersModel.belongsToMany(productsModel, { through: ordersProductsModel });
 productsModel.belongsToMany(ordersModel, { through: ordersProductsModel });
 
 module.exports = {
-  projectDatabase,
+  sequelize,
   usersModel,
   productsModel,
   ordersModel,
