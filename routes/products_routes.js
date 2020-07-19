@@ -6,8 +6,26 @@ const productMiddlewares = require('../middlewares/products_middlewares');
 const generalMiddlewares = require('../middlewares/general_middlewares');
 
 router.get('/', productControllers.getProductsData);
-router.post('/', userMiddlewares.validateAdminUser, generalMiddlewares.checkBody, productMiddlewares.requireProductData, productControllers.newProduct);
-router.put('/:id', userMiddlewares.validateAdminUser, generalMiddlewares.checkBody, productMiddlewares.requireProductData, productControllers.modifyProduct);
-router.delete('/:id', userMiddlewares.validateAdminUser, generalMiddlewares.checkBody, productMiddlewares.requireProductData, productControllers.deleteProduct);
+
+router.post('/',
+    userMiddlewares.validateAdminUser,
+    generalMiddlewares.checkBody,
+    productMiddlewares.requireProductData,
+    productControllers.newProduct
+);
+
+router.put('/:id',
+    userMiddlewares.validateAdminUser,
+    generalMiddlewares.checkBody,
+    productMiddlewares.requireProductData,
+    productControllers.modifyProduct
+);
+
+router.delete('/:id',
+    userMiddlewares.validateAdminUser,
+    generalMiddlewares.checkBody,
+    productMiddlewares.requireProductData,
+    productControllers.deleteProduct
+);
 
 module.exports = router;
