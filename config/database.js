@@ -126,10 +126,6 @@ const ordersProductsModel = sequelize.define('ordersProducts', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  productPrice: {
-    type: Sequelize.FLOAT,
-    allowNull: false
-  },
   subtotalPrice: {
     type: Sequelize.FLOAT,
     allowNull: false

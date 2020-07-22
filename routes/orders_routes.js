@@ -16,7 +16,7 @@ router.get('/',
     orderControllers.getOrdersData
 );
 
-router.put('/',
+router.put('/:id',
     userMiddlewares.validateAdminUser,
     generalMiddlewares.checkBody,
     orderMiddlewares.requireOrderStatus,

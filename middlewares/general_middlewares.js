@@ -11,6 +11,9 @@ general_middlewares.checkBody = (req, res, next) => {
     }
 };
 
+//validateToken
+//isTokenAdmin
+
 function isObjEmpty(obj) {
     return Object.entries(obj).length === 0;
 }

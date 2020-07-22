@@ -1,2 +1,2 @@
 # delilahResto_project
-Delilah Restó Acámica + Globant Project N3
+Delilah Restó Acámica+Globant Project N3
