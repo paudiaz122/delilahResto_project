@@ -26,7 +26,7 @@ const usersModel = sequelize.define('users', {
     allowNull: false
   },
   password: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.TEXT,
     allowNull: false
   },
   fullName: {
@@ -38,7 +38,7 @@ const usersModel = sequelize.define('users', {
     allowNull: false
   },
   phoneNumer: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.TEXT,
     allowNull: false
   },
   address: {
@@ -72,7 +72,7 @@ const ordersModel = sequelize.define('orders', {
   state: {
     type: Sequelize.ENUM,
     allowNull: false,
-    values: ['Realizado', 'Confirmado', 'Preparando', 'Enviado', 'Recibido']
+    values: ['Nuevo', 'Confirmado', 'Preparando', 'Enviando', 'Entregado']
   },
   createdAt: {
     type: Sequelize.DATE,

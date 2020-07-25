@@ -6,14 +6,14 @@ const generalMiddlewares = require('../middlewares/general_middlewares');
 
 router.post('/login',
     generalMiddlewares.checkBody,
-    userMiddlewares.requireRegisterData,
+    userMiddlewares.requireLoginData,
     userMiddlewares.validateUserCredentials,
     userControllers.loginUser
 );
 
 router.post('/register',
     generalMiddlewares.checkBody,
-    userMiddlewares.requireLoginData,
+    userMiddlewares.requireRegisterData,
     userMiddlewares.isDataValid,
     userControllers.registerUser
 );

@@ -1,35 +1,5 @@
-const JWT = require('jsonwebtoken');
-const JWTSign = 'mySUPERpass.12';
+const projectDatabase = require('../config/database');
 const users_middlewares = {};
-
-//Capto error en base de datos
-const catchDatabaseEror = (err, res) => {
-    res.status(500).json({
-        message: 'Hubo un error con la base de datos.',
-        error: err
-    });
-};
-
-//Seguro que no anda
-users_middlewares.validateAdminUser = (req, res, next) => {
-    try {
-        const auth = req.headers.authorization;
-        const verify = JWT.verify(auth, JWTSign, (err, decoded) => {
-            if (nosequevaaca) {
-
-            } else {
-                res.status(403).json({
-                    message: 'Permisos no válidos'
-                });
-            }
-        });
-    }
-    catch (err) {
-        res.status(401).json({
-            message: 'Token no válido'
-        });
-    }
-};
 
 users_middlewares.requireRegisterData = async (req, res, next) => {
     const userName = req.body.userName;
@@ -98,6 +68,7 @@ users_middlewares.validateUserCredentials = async (req, res) => {
             message: 'Usuario o contraseña inválidos.'
         });
     } else {
+        res.locals.userPayload = userFound;
         next();
     }
 
@@ -115,17 +86,26 @@ users_middlewares.isDataValid = async (req, res, next) => {
         where: { email: email }
     }).catch(err => catchDatabaseEror(err, res));
 
-    if(!isUserNameValid) {
+    if(isUserNameValid) {
         res.status(500).json({
             message: 'Nombre de usuario ya existente.'
         });
-    } else if (!isEmailValid) {
+    } else if (isEmailValid) {
         res.status(500).json({
             message: 'Email ya registrado.'
         });
     } else {
         next();
     }
+};
+
+//Funciones auxiliares
+//Capto error en base de datos
+const catchDatabaseEror = (err, res) => {
+    res.status(500).json({
+        message: 'Hubo un error con la base de datos.',
+        error: err
+    });
 };
 
 module.exports = users_middlewares;

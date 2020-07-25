@@ -5,24 +5,31 @@ const productControllers = require('../controllers/products_controllers');
 const productMiddlewares = require('../middlewares/products_middlewares');
 const generalMiddlewares = require('../middlewares/general_middlewares');
 
+//Acceso público
 router.get('/', productControllers.getProductsData);
 
+//Acceso privado
 router.post('/',
-    userMiddlewares.validateAdminUser,
+    generalMiddlewares.validateToken,
+    generalMiddlewares.isAdminUser,
     generalMiddlewares.checkBody,
     productMiddlewares.requireProductData,
     productControllers.newProduct
 );
 
+//Acceso privado
 router.put('/:id',
-    userMiddlewares.validateAdminUser,
+    generalMiddlewares.validateToken,
+    generalMiddlewares.isAdminUser,
     generalMiddlewares.checkBody,
     productMiddlewares.requireProductData,
     productControllers.modifyProduct
 );
 
+//Acceso privado
 router.delete('/:id',
-    userMiddlewares.validateAdminUser,
+    generalMiddlewares.validateToken,
+    generalMiddlewares.isAdminUser,
     generalMiddlewares.checkBody,
     productMiddlewares.requireProductData,
     productControllers.deleteProduct

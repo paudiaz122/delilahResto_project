@@ -1,3 +1,5 @@
+const JWT = require('jsonwebtoken');
+const JWTSign = 'mySUPERpass.12';
 const general_middlewares = {};
 
 general_middlewares.checkBody = (req, res, next) => {
@@ -11,9 +13,42 @@ general_middlewares.checkBody = (req, res, next) => {
     }
 };
 
-//validateToken
-//isTokenAdmin
+general_middlewares.validateToken = (req, res, next) => {
+    const token = req.headers.authorization;
 
+    if(!token) {
+        res.status(401).json({
+            message: 'No token found.'
+        });
+    } else {
+        const tokenVerified = JWT.verify(token, JWTSign, (error, decoded) => {
+            if(error) {
+                res.status(403).json({
+                    message: 'Unable to verify the token.',
+                    error
+                });
+            } else {
+                decoded.isAdmin === true ? res.locals.isAdmin = true : res.locals.isAdmin = false;
+                res.status(200).json({
+                    message: 'Token verified.'
+                });
+                next();
+            }
+        });
+    }
+};
+
+general_middlewares.isAdminUser = (req, res, next) => {
+    if(res.locals.isAdmin === false) {
+        res.status(403).json({
+            message: 'Permition denied.'
+        });
+    } else {
+        next();
+    }
+};
+
+//Funciones auxiliares
 function isObjEmpty(obj) {
     return Object.entries(obj).length === 0;
 }
