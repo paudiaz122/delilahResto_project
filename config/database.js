@@ -10,7 +10,7 @@ const sequelize = new Sequelize('delilahResto', 'root', '', {
 });
 
 sequelize.sync({
-  force: true
+  force: false
 });
 
 const usersModel = sequelize.define('users', {
@@ -37,7 +37,7 @@ const usersModel = sequelize.define('users', {
     type: Sequelize.TEXT,
     allowNull: false
   },
-  phoneNumer: {
+  phoneNumber: {
     type: Sequelize.TEXT,
     allowNull: false
   },

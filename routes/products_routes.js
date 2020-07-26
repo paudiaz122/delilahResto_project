@@ -21,6 +21,7 @@ router.post('/',
 router.put('/:id',
     generalMiddlewares.validateToken,
     generalMiddlewares.isAdminUser,
+    productMiddlewares.validateProductId,
     generalMiddlewares.checkBody,
     productMiddlewares.requireProductData,
     productControllers.modifyProduct
@@ -30,8 +31,7 @@ router.put('/:id',
 router.delete('/:id',
     generalMiddlewares.validateToken,
     generalMiddlewares.isAdminUser,
-    generalMiddlewares.checkBody,
-    productMiddlewares.requireProductData,
+    productMiddlewares.validateProductId,
     productControllers.deleteProduct
 );
 

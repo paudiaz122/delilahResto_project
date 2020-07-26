@@ -9,12 +9,16 @@ const catchDatabaseEror = (err, res) => {
 };
 
 products_controllers.getProductsData = async (req, res) => {
-    const productos = await projectDatabase.productsModel.findAll()
+    const products = await projectDatabase.productsModel.findAll({
+        where: {
+            isAvailable: true
+        }
+    })
     .catch(err => catchDatabaseEror(err, res));
 
     res.status(200).json({
-        quantity: productos.length,
-        productos
+        quantity: products.length,
+        products
     });
 };
 
@@ -29,11 +33,8 @@ products_controllers.newProduct = async (req, res) => {
 };
 
 products_controllers.modifyProduct = async (req, res) => {
-    const modifiedProduct = await projectDatabase.productsModel
-    .update(
-        req.body,
-        { where: { id: req.params.id } }
-    ).catch(err => catchDatabaseEror(err, res));
+    const modifiedProduct = await req.locals.product.update(req.body)
+    .catch(err => catchDatabaseEror(err, res));
 
     res.status(200).json({
         message: 'Product modified.',
@@ -43,7 +44,7 @@ products_controllers.modifyProduct = async (req, res) => {
 
 products_controllers.deleteProduct = async (req, res) => {
     const deletedProduct = await projectDatabase.productsModel
-    .destroy({ where: { id: req.params.id } })
+    .update({ isAvailable: false }, { where: { id: req.params.id } })
     .catch(err => catchDatabaseEror(err, res));
 
     res.status(200).json({

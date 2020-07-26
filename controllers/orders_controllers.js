@@ -44,13 +44,43 @@ orders_controllers.newOrder = async (req, res) => {
     });
 };
 
-orders_controllers.getOrdersData = (req, res) => {
+/**
+ * Listar todas las ordenes (admin)
+ * Listar ordenes de un usuario (no admin)
+ */
+orders_controllers.getOrdersData = async (req, res) => {
+    const where = {};
 
-    //chequear que tipo de usuario es antes que nada
+    if(req.locals.isAdmin) {
+        const orders = await projectDatabase.ordersModel.findAll()
+        .catch(err => catchDatabaseEror(err, res));
+
+        res.status(200).json({
+            message: 'You have access to all orders.',
+            orders
+        });
+    } else {
+        const orders = await projectDatabase.ordersModel.findAll({
+            where: {userId: res.locals.userPayload.id}
+        }).catch(err => catchDatabaseEror(err, res));
+
+        res.status(200).json({
+            message: 'You have access to your orders.',
+            orders
+        });
+    }
 };
 
-orders_controllers.modifyOrderStatus = (req, res) => {
+orders_controllers.modifyOrderStatus = async (req, res) => {
+    const newState = req.body.state;
 
+    const updatedOrder = await projectDatabase.ordersModel
+    .update({ state: newState }, { where: { id: req.params.id } })
+    .catch(err => catchDatabaseEror(err, res));
+
+    res.status(200).json({
+        message: 'Order updated.'
+    });
 };
 
 //Funciones auxiliares
@@ -81,10 +111,8 @@ function makeArrayForOrdersProducts(orderId, productsArray) {
             orderId: orderId,
             productId: productsArray[i].id
         }
-
         arrayForDb[i] = productos;
     }
-
     return arrayForDb;
 }
 

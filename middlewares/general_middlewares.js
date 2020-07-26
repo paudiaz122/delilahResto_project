@@ -23,10 +23,7 @@ general_middlewares.validateToken = (req, res, next) => {
                 error
             });
         } else {
-            decoded.isAdmin === true ? res.locals.isAdmin = true : res.locals.isAdmin = false;
-            res.status(200).json({
-                message: 'Token verified.'
-            });
+            res.locals.isAdmin = decoded.isAdmin;
             next();
         }
     });

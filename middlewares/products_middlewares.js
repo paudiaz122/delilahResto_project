@@ -1,4 +1,19 @@
+const projectDatabase = require('../config/database');
 const products_middlewares = {};
+
+products_middlewares.validateProductId = (req, res, next) => {
+    const product = await projectDatabase.productsModel.findByPk(req.params.id);
+    
+    if(product) {
+        res.local.product = product;
+        next();
+    } else {
+        res.status(404).json({
+            message: 'The product does not exist.'
+        });
+    }
+
+};
 
 products_middlewares.requireProductData = (req, res, next) => {
     const name = req.body.name;
