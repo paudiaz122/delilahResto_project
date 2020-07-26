@@ -16,26 +16,20 @@ general_middlewares.checkBody = (req, res, next) => {
 general_middlewares.validateToken = (req, res, next) => {
     const token = req.headers.authorization;
 
-    if(!token) {
-        res.status(401).json({
-            message: 'No token found.'
-        });
-    } else {
-        const tokenVerified = JWT.verify(token, JWTSign, (error, decoded) => {
-            if(error) {
-                res.status(403).json({
-                    message: 'Unable to verify the token.',
-                    error
-                });
-            } else {
-                decoded.isAdmin === true ? res.locals.isAdmin = true : res.locals.isAdmin = false;
-                res.status(200).json({
-                    message: 'Token verified.'
-                });
-                next();
-            }
-        });
-    }
+    const tokenVerified = JWT.verify(token, JWTSign, (error, decoded) => {
+        if(error) {
+            res.status(403).json({
+                message: 'Unable to verify the token.',
+                error
+            });
+        } else {
+            decoded.isAdmin === true ? res.locals.isAdmin = true : res.locals.isAdmin = false;
+            res.status(200).json({
+                message: 'Token verified.'
+            });
+            next();
+        }
+    });
 };
 
 general_middlewares.isAdminUser = (req, res, next) => {

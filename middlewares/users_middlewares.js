@@ -55,7 +55,7 @@ users_middlewares.requireLoginData = (req, res, next) => {
     }
 };
 
-users_middlewares.validateUserCredentials = async (req, res) => {
+users_middlewares.validateUserCredentials = async (req, res, next) => {
     const userName = req.body.userName;
     const password = req.body.password;
 

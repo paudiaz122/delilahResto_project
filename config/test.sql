@@ -1,0 +1,2 @@
+INSERT INTO `users` (`id`, `userName`, `password`, `fullName`, `email`, `phoneNumer`, `address`, `isAdmin`)
+VALUES ('1', 'marudiaz', 'marula', 'Mariana Diaz', 'marianasdiaz@hotmail.com.ar', '3416789456', '9 de julio 3940', '0');
