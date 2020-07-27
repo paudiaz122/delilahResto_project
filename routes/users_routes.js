@@ -7,7 +7,6 @@ const generalMiddlewares = require('../middlewares/general_middlewares');
 router.post('/login',
     generalMiddlewares.checkBody,
     userMiddlewares.requireLoginData,
-    userMiddlewares.validateUserCredentials,
     userControllers.loginUser
 );
 //validate users credentials deberia ser parte de loginUser

@@ -33,7 +33,7 @@ products_controllers.newProduct = async (req, res) => {
 };
 
 products_controllers.modifyProduct = async (req, res) => {
-    const modifiedProduct = await req.locals.product.update(req.body)
+    const modifiedProduct = await res.locals.product.update(req.body)
     .catch(err => catchDatabaseEror(err, res));
 
     res.status(200).json({

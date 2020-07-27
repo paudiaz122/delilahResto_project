@@ -55,25 +55,6 @@ users_middlewares.requireLoginData = (req, res, next) => {
     }
 };
 
-users_middlewares.validateUserCredentials = async (req, res, next) => {
-    const userName = req.body.userName;
-    const password = req.body.password;
-
-    const userFound = await projectDatabase.usersModel.findOne({
-        where: { userName: userName, password: password }
-    }).catch(err => catchDatabaseEror(err, res));
-
-    if(!userFound) {
-        res.status(404).json({
-            message: 'Usuario o contraseña inválidos.'
-        });
-    } else {
-        res.locals.userPayload = userFound;
-        next();
-    }
-
-};
-
 users_middlewares.isDataValid = async (req, res, next) => {
     const userName = req.body.userName;
     const email = req.body.email;

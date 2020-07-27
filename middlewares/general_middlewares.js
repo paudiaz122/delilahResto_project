@@ -23,14 +23,14 @@ general_middlewares.validateToken = (req, res, next) => {
                 error
             });
         } else {
-            res.locals.isAdmin = decoded.isAdmin;
+            res.locals.userPayload = decoded;
             next();
         }
     });
 };
 
 general_middlewares.isAdminUser = (req, res, next) => {
-    if(res.locals.isAdmin === false) {
+    if(res.locals.userPayload.isAdmin === false) {
         res.status(403).json({
             message: 'Permition denied.'
         });

@@ -2,14 +2,14 @@ const projectDatabase = require('../config/database');
 const orders_controllers = {};
 
 orders_controllers.newOrder = async (req, res) => {
-    const loggedUser = res.locals.payloadUsuario;
+    const loggedUser = res.locals.userPayload;
     const newOrder = {
-        userId: loggedUser.userId,
-        totalPrice: calculateTotalPrice(req.body.products),
+        totalPrice: calculateTotalPrice(req.body.productsArray),
         paymentMethod: req.body.paymentMethod,
         state: 'Nuevo',
         createdAt: new Date(),
         updatedAt: new Date(),
+        userId: loggedUser.id
     }
 
     //Nueva orden en la BDD
@@ -18,7 +18,7 @@ orders_controllers.newOrder = async (req, res) => {
 
     //Guardo info de la orden
     const newOrderId = newOrderDB.id;
-    const ordersProductsArray = makeArrayForOrdersProducts(newOrderId, req.body.products);
+    const ordersProductsArray = makeArrayForOrdersProducts(newOrderId, req.body.productsArray);
 
     //Inserto en BDD
     const orderProduct = await projectDatabase.ordersProductsModel.bulkCreate(ordersProductsArray)
@@ -51,7 +51,7 @@ orders_controllers.newOrder = async (req, res) => {
 orders_controllers.getOrdersData = async (req, res) => {
     const where = {};
 
-    if(req.locals.isAdmin) {
+    if(res.locals.userPayload.isAdmin) {
         const orders = await projectDatabase.ordersModel.findAll()
         .catch(err => catchDatabaseEror(err, res));
 
@@ -73,9 +73,10 @@ orders_controllers.getOrdersData = async (req, res) => {
 
 orders_controllers.modifyOrderStatus = async (req, res) => {
     const newState = req.body.state;
+    const newDate = new Date();
 
     const updatedOrder = await projectDatabase.ordersModel
-    .update({ state: newState }, { where: { id: req.params.id } })
+    .update({ state: newState, updatedAt: newDate }, { where: { id: req.params.id } })
     .catch(err => catchDatabaseEror(err, res));
 
     res.status(200).json({
@@ -109,7 +110,7 @@ function makeArrayForOrdersProducts(orderId, productsArray) {
             productQuantity: productsArray[i].quantity,
             subtotalPrice: productsArray[i].quantity * productsArray[i].price,
             orderId: orderId,
-            productId: productsArray[i].id
+            productId: productsArray[i].id,
         }
         arrayForDb[i] = productos;
     }

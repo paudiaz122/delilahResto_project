@@ -10,6 +10,7 @@ router.post('/',
     generalMiddlewares.validateToken,
     generalMiddlewares.checkBody,
     orderMiddlewares.requireOrderData,
+    orderMiddlewares.isProductAvailable,
     orderControllers.newOrder
 );
 
