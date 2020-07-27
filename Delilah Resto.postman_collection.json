@@ -1,0 +1,285 @@
+{
+	"info": {
+		"_postman_id": "08352ae5-c65d-4427-904f-49428df01c9a",
+		"name": "Delilah Resto",
+		"description": "Testing endpoints for 3rd DWFS Project.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\" : \"paudiaz\",\r\n    \"password\" : \"pauloncha\",\r\n    \"fullName\" : \"Paula Diaz\",\r\n    \"email\" : \"pau.diaz@hotmail.com.ar\",\r\n    \"phoneNumber\" : \"3416321456\",\r\n    \"address\" : \"Calle Linda 123\",\r\n    \"isAdmin\" : true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/users/register",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\" : \"paudiaz\",\r\n    \"password\" : \"pauloncha\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/users/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST products",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlck5hbWUiOiJwYXVkaWF6IiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTk1ODc3Njg2fQ.Khb-Ey2Yja7owyGU8nfJep1j-8sysuRraixjNwJSTHY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Coca cola\",\r\n    \"description\" : \"Coca de 500ml\",\r\n    \"price\" : 70,\r\n    \"imgSrc\" : \"imagendeunacoca\",\r\n    \"isAvailable\" : true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/products",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "POST a new product."
+			},
+			"response": []
+		},
+		{
+			"name": "GET products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/products",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT products",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlck5hbWUiOiJwYXVkaWF6IiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTk1ODc5MTUwfQ.ha5SvysUxCJG5MYFqdEXbZ3LeiBNQodSsCAjsn-2h_c",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Papas fritas locas\",\r\n    \"description\" : \"They're fries!\",\r\n    \"price\" : 200,\r\n    \"imgSrc\" : \"imagendepapas\",\r\n    \"isAvailable\" : true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/products/3",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEL products",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlck5hbWUiOiJwYXVkaWF6IiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTk1ODc5MTUwfQ.ha5SvysUxCJG5MYFqdEXbZ3LeiBNQodSsCAjsn-2h_c",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/products/3",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST orders",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlck5hbWUiOiJtYXJ1ZGlheiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1OTU4Nzc4NzV9.A9akbJ7d_-fAwnT2ZiqYkD7V_VjoIZhHXWRR1PdAroI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentMethod\" : \"Tarjeta\",\r\n    \"productsArray\" : [\r\n        {\r\n            \"id\": 2,\r\n            \"name\": \"Hamburguesa\",\r\n\t\t\t\"description\": \"It's a hamburger!\",\r\n            \"price\": 400,\r\n\t\t\t\"quantity\": 1,\r\n            \"isAvailable\" : true\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"name\": \"Papas fritas\",\r\n\t\t\t\"description\": \"They're fries!\",\r\n            \"price\": 200,\r\n\t\t\t\"quantity\": 1,\r\n            \"isAvailable\" : false\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET orders",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlck5hbWUiOiJwYXVkaWF6IiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTk1ODc4MTAxfQ.ISe_pczmck3goqXNohGouSxf1WBpGpY0iBFiiSNopv8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT orders",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlck5hbWUiOiJtYXJ1ZGlheiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1OTU4Nzg3OTh9.v0bokdlKRr99Dxk5chkArfqKPuGnTV1GeAbTDbw3RrA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"state\" : \"Preparando\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/orders/7",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"orders",
+						"7"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
