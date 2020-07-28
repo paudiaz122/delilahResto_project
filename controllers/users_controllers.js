@@ -13,7 +13,7 @@ users_controllers.loginUser = async (req, res) => {
 
     if(!userFound) {
         res.status(404).json({
-            message: 'Usuario o contraseña inválidos.'
+            message: 'Username or password invalid.'
         });
     } else {
         res.locals.userPayload = userFound;
@@ -36,7 +36,7 @@ users_controllers.registerUser = async (req, res) => {
     });
 
     res.status(201).json({
-        message: 'User created',
+        message: 'User created.',
         newUser
     });
 };
@@ -45,7 +45,7 @@ users_controllers.registerUser = async (req, res) => {
 //Capto error en base de datos
 const catchDatabaseEror = (err, res) => {
     res.status(500).json({
-        message: 'Hubo un error con la base de datos.',
+        message: 'There was a problem with the database.',
         error: err
     });
 };

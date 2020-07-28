@@ -3,8 +3,9 @@ const orders_controllers = {};
 
 orders_controllers.newOrder = async (req, res) => {
     const loggedUser = res.locals.userPayload;
+    const dbProducts = res.locals.products;
     const newOrder = {
-        totalPrice: calculateTotalPrice(req.body.productsArray),
+        totalPrice: calculateTotalPrice(dbProducts, req.body.productsArray),
         paymentMethod: req.body.paymentMethod,
         state: 'Nuevo',
         createdAt: new Date(),
@@ -18,7 +19,7 @@ orders_controllers.newOrder = async (req, res) => {
 
     //Guardo info de la orden
     const newOrderId = newOrderDB.id;
-    const ordersProductsArray = makeArrayForOrdersProducts(newOrderId, req.body.productsArray);
+    const ordersProductsArray = makeArrayForOrdersProducts(newOrderId, dbProducts, req.body.productsArray);
 
     //Inserto en BDD
     const orderProduct = await projectDatabase.ordersProductsModel.bulkCreate(ordersProductsArray)
@@ -92,25 +93,27 @@ const catchDatabaseEror = (err, res) => {
     });
 };
 
-function calculateTotalPrice(productsArray) {
+function calculateTotalPrice(dbProducts, bodyProducts) {
     let total = 0;
 
-    productsArray.forEach(product => {
-        total = total + product.price * product.quantity;
+    bodyProducts.forEach(bodyProduct => {
+        productFound = dbProducts.find(dbProduct => dbProduct.id === bodyProduct.id);
+        total = total + productFound.price * bodyProduct.quantity;
     });
 
     return total;
 }
 
-function makeArrayForOrdersProducts(orderId, productsArray) {
+function makeArrayForOrdersProducts(orderId, dbProducts, bodyProducts) {
     let arrayForDb = [];
 
-    for(let i = 0; i < productsArray.length; i++) {
+    for(let i = 0; i < bodyProducts.length; i++) {
+        productFound = dbProducts.find(dbProduct => dbProduct.id === bodyProducts[i].id);
         const productos = {
-            productQuantity: productsArray[i].quantity,
-            subtotalPrice: productsArray[i].quantity * productsArray[i].price,
+            productQuantity: bodyProducts[i].quantity,
+            subtotalPrice: bodyProducts[i].quantity * productFound.price,
             orderId: orderId,
-            productId: productsArray[i].id,
+            productId: bodyProducts[i].id,
         }
         arrayForDb[i] = productos;
     }

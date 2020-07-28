@@ -17,6 +17,7 @@ products_controllers.getProductsData = async (req, res) => {
     .catch(err => catchDatabaseEror(err, res));
 
     res.status(200).json({
+        message: 'Returning all available products.',
         quantity: products.length,
         products
     });

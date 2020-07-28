@@ -69,11 +69,11 @@ users_middlewares.isDataValid = async (req, res, next) => {
 
     if(isUserNameValid) {
         res.status(500).json({
-            message: 'Nombre de usuario ya existente.'
+            message: 'This username is already registered.'
         });
     } else if (isEmailValid) {
         res.status(500).json({
-            message: 'Email ya registrado.'
+            message: 'This email is already registered.'
         });
     } else {
         next();

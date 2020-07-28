@@ -1,0 +1,329 @@
+swagger: "2.0"
+info:
+  description: "This is the documentation for the API created for project N3 of the Acamica+Globant Desarrollo Web Full Stack carreer."
+  version: "1.0.0"
+  title: "Delilah Restó API"
+  
+host: "delilahrestoapp.com"
+basePath: "/v2"
+
+tags:
+- name: "users"
+  description: "Users login and registration"
+- name: "products"
+  description: "Products information and administrator operations available"
+- name: "orders"
+  description: "Orders information and operations available"
+  
+schemes:
+- "https"
+- "http"
+
+consumes:
+- "application/json"
+- "application/xml"
+produces:
+- "application/xml"
+- "application/json"
+
+paths:
+  /users/register:
+    post:
+      tags:
+      - "users"
+      summary: "Register a new user"
+      description: ""
+      operationId: "registerUser"
+      parameters:
+      - in: "body"
+        name: "Information needed to register a user"
+        description: "The user completes the information asked for in the registering form"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        "400":
+          description: "Problems with the information provided"
+  /users/login:
+    post:
+      tags:
+      - "users"
+      summary: "Update an existing pet"
+      description: ""
+      operationId: "updatePet"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Pet object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/UserLogin"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Pet not found"
+        "405":
+          description: "Validation exception"
+  /products:
+    get:
+      tags:
+      - "products"
+      summary: "Returns all products"
+      description: "Returns all the products in the database"
+      operationId: "getProductsData"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "token"
+        description: "Token"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Pet not found"
+    post:
+      tags:
+      - "products"
+      summary: "Creates a new product"
+      description: "Creates a new product in the database"
+      operationId: "newProduct"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "Data needed for a product"
+        required: true
+        schema:
+          $ref: "#/definitions/Product"
+      - name: "token"
+        in: "header"
+        description: "Token"
+        required: true
+        type: "string"
+      responses:
+        "405":
+          description: "Invalid input"
+  /products/{id}:
+    put:
+      tags:
+      - "products"
+      summary: "Modifies a product"
+      description: "Modifies a product"
+      operationId: "modifyProduct"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Product id"
+        required: true
+        type: "number"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Product"
+      - name: "token"
+        in: "header"
+        description: "Token"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Pet not found"
+    delete:
+      tags:
+      - "products"
+      summary: "Deletes a product"
+      description: "Deletes a product (deactivates it)"
+      operationId: "deleteProduct"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Product id"
+        required: true
+        type: "number"
+      - name: "token"
+        in: "header"
+        description: "Token"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+  /orders:
+    get:
+      tags:
+      - "orders"
+      summary: "Returns all orders if admin, or user's orders if not admin"
+      description: "Returns orders"
+      operationId: "getOrdersData"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "token"
+        description: "Token"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Pet not found"
+    post:
+      tags:
+      - "orders"
+      summary: "Creates a new order"
+      description: "Creates a new order in the database"
+      operationId: "newOrder"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "Data needed for an order"
+        required: true
+        schema:
+          $ref: "#/definitions/Order"
+      - name: "token"
+        in: "header"
+        description: "Token"
+        required: true
+        type: "string"
+      responses:
+        "405":
+          description: "Invalid input"
+  /orders/{id}:
+    put:
+      tags:
+      - "orders"
+      summary: "Modifies the order state"
+      description: "Modifies the order state"
+      operationId: "modifyOrderStatus"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Order id"
+        required: true
+        type: "number"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/OrderState"
+      - name: "token"
+        in: "header"
+        description: "Token"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Pet not found"
+definitions:
+  User:
+    type: "object"
+    properties:
+      userName:
+        type: "string"
+      pasword:
+        type: "string"
+      fullName:
+        type: "string"
+      email:
+        type: "string"
+      phoneNumber:
+        type: "string"
+      address:
+        type: "string"
+      isAdmin:
+        type: "boolean"
+    xml:
+      name: "User"
+  UserLogin:
+    type: "object"
+    properties:
+      userName:
+        type: "string"
+      pasword:
+        type: "string"
+    xml:
+      name: "UserLogin"
+  Product:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      description:
+        type: "string"
+      price:
+        type: "number"
+      imgSrc:
+        type: "string"
+      isAvailable:
+        type: "boolean"
+    xml:
+      name: "Product"
+  Order:
+    type: "object"
+    properties:
+      paymentMethod:
+        type: "string"
+        enum:
+        - "Efectivo"
+        - "Tarjeta"
+      productsArray:
+        type: "array"
+        items:
+          type: object
+          properties:
+            id:
+              type: "number"
+            quantity:
+              type: "number"
+    xml:
+      name: "Order"
+  OrderState:
+    type: "object"
+    properties:
+      state:
+        type: "string"
+        enum:
+        - "Nuevo"
+        - "Confirmado"
+        - "Preparando"
+        - "Enviando"
+        - "Entregado"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"

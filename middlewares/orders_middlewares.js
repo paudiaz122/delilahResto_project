@@ -1,3 +1,5 @@
+const projectDatabase = require('../config/database');
+const { Op } = require("sequelize");
 const orders_middlewares = {};
 
 orders_middlewares.requireOrderData = (req, res, next) => {
@@ -8,7 +10,7 @@ orders_middlewares.requireOrderData = (req, res, next) => {
         res.status(400).json({
             message: 'There was a problem with the payment method provided'
         });
-    } else if(productsArray.length === 0) {
+    } else if(!Array.isArray(productsArray) || productsArray.length === 0) {
         res.status(400).json({
             message: 'Your order is empty!'
         });
@@ -29,17 +31,25 @@ orders_middlewares.requireOrderStatus = (req, res, next) => {
     }
 };
 
-orders_middlewares.isProductAvailable = (req, res, next) => {
+orders_middlewares.isProductAvailable = async (req, res, next) => {
     const productsArray = req.body.productsArray;
+    const productsIdArray = productsArray.map(product => product.id);
 
-    const notAvailable = productsArray.filter(product => product.isAvailable === false);
+    const products = await projectDatabase.productsModel.findAll({
+        where: {
+            id: {
+              [Op.or]: productsIdArray
+            },
+            isAvailable: true
+        }
+    });
 
-    if(notAvailable.length > 0) {
+    if(productsArray.length !== products.length) {
         res.status(404).json({
-            message: 'Some products are not available.',
-            notAvailable
+            message: 'Some products are not available.'
         });
     } else {
+        res.locals.products = products;
         next();
     }
 }
