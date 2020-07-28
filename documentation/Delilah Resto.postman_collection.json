@@ -202,7 +202,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"paymentMethod\" : \"Tarjeta\",\r\n    \"productsArray\" : [\r\n        {\r\n            \"id\": 2,\r\n            \"name\": \"Hamburguesa\",\r\n\t\t\t\"description\": \"It's a hamburger!\",\r\n            \"price\": 400,\r\n\t\t\t\"quantity\": 1,\r\n            \"isAvailable\" : true\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"name\": \"Papas fritas\",\r\n\t\t\t\"description\": \"They're fries!\",\r\n            \"price\": 200,\r\n\t\t\t\"quantity\": 1,\r\n            \"isAvailable\" : false\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"paymentMethod\" : \"Efectivo\",\r\n    \"productsArray\" : [\r\n        {\r\n            \"id\": 2,\r\n\t\t\t\"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 1,\r\n\t\t\t\"quantity\": 2\r\n        },\r\n        {\r\n            \"id\": 4,\r\n\t\t\t\"quantity\": 1\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
