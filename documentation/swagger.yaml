@@ -43,7 +43,11 @@ paths:
           $ref: "#/definitions/User"
       responses:
         "400":
-          description: "Problems with the information provided"
+          description: "There was a problem with the data provided."
+        "500":
+          description: "This username/email is already registered."
+        "200":
+          description: "User created."
   /users/login:
     post:
       tags:
@@ -66,11 +70,11 @@ paths:
           $ref: "#/definitions/UserLogin"
       responses:
         "400":
-          description: "Invalid ID supplied"
+          description: "There was a problem with the data provided."
         "404":
-          description: "Pet not found"
-        "405":
-          description: "Validation exception"
+          description: "Username or password invalid."
+        "200":
+          description: "Successfully logged in."
   /products:
     get:
       tags:
@@ -88,12 +92,10 @@ paths:
         required: true
         type: "string"
       responses:
+        "500":
+          description: "Hubo un error con la base de datos."
         "200":
-          description: "successful operation"
-        "400":
-          description: "Invalid ID supplied"
-        "404":
-          description: "Pet not found"
+          description: "Returning all available products."
     post:
       tags:
       - "products"
@@ -116,8 +118,12 @@ paths:
         required: true
         type: "string"
       responses:
-        "405":
-          description: "Invalid input"
+        "400":
+          description: "There was a problem with the information provided."
+        "403":
+          description: "Unable to verify the token/Permission denied."
+        "201":
+          description: "Product created."
   /products/{id}:
     put:
       tags:
@@ -146,9 +152,13 @@ paths:
         type: "string"
       responses:
         "400":
-          description: "Invalid ID supplied"
+          description: "There was a problem with the information provided."
+        "403":
+          description: "Unable to verify the token/Permission denied."
         "404":
-          description: "Pet not found"
+          description: "The product does not exist."
+        "200":
+          description: "Product modified."
     delete:
       tags:
       - "products"
@@ -170,8 +180,12 @@ paths:
         required: true
         type: "string"
       responses:
+        "403":
+          description: "Unable to verify the token/Permission denied."
+        "404":
+          description: "The product does not exist."
         "200":
-          description: "successful operation"
+          description: "Product deleted."
   /orders:
     get:
       tags:
@@ -189,12 +203,10 @@ paths:
         required: true
         type: "string"
       responses:
+        "403":
+          description: "Unable to verify the token/Permission denied."
         "200":
-          description: "successful operation"
-        "400":
-          description: "Invalid ID supplied"
-        "404":
-          description: "Pet not found"
+          description: "You have access to all orders/You have access to your orders."
     post:
       tags:
       - "orders"
@@ -217,8 +229,16 @@ paths:
         required: true
         type: "string"
       responses:
-        "405":
-          description: "Invalid input"
+        "400":
+          description: "There was a problem with the information provided."
+        "403":
+          description: "Unable to verify the token/Permission denied."
+        "404":
+          description: "Some products are not available."
+        "500":
+          description: "Products cannot be inserted into the database. The order was deleted from database."
+        "201":
+          description: "Order successfully created."
   /orders/{id}:
     put:
       tags:
@@ -247,9 +267,11 @@ paths:
         type: "string"
       responses:
         "400":
-          description: "Invalid ID supplied"
-        "404":
-          description: "Pet not found"
+          description: "There was a problem with the information provided."
+        "403":
+          description: "Unable to verify the token/Permission denied."
+        "200":
+          description: "Order updated."
 definitions:
   User:
     type: "object"
@@ -324,6 +346,3 @@ definitions:
         - "Preparando"
         - "Enviando"
         - "Entregado"
-externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"

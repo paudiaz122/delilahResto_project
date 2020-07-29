@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userName\" : \"paudiaz\",\r\n    \"password\" : \"pauloncha\",\r\n    \"fullName\" : \"Paula Diaz\",\r\n    \"email\" : \"pau.diaz@hotmail.com.ar\",\r\n    \"phoneNumber\" : \"3416321456\",\r\n    \"address\" : \"Calle Linda 123\",\r\n    \"isAdmin\" : true\r\n}",
+					"raw": "{\r\n    \"userName\" : \"usuarioInvitado1\",\r\n    \"password\" : \"contraseniaInvitada1\",\r\n    \"fullName\" : \"Pepito Perez\",\r\n    \"email\" : \"pepito@hotmail.com.ar\",\r\n    \"phoneNumber\" : \"3412345678\",\r\n    \"address\" : \"Calle Linda 456\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -41,7 +41,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userName\" : \"paudiaz\",\r\n    \"password\" : \"pauloncha\"\r\n}",
+					"raw": "{\r\n    \"userName\" : \"paudiaz\",\r\n    \"password\" : \"miContrasenia\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -69,13 +69,13 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlck5hbWUiOiJwYXVkaWF6IiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTk1ODc3Njg2fQ.Khb-Ey2Yja7owyGU8nfJep1j-8sysuRraixjNwJSTHY",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlck5hbWUiOiJwYXVkaWF6IiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTk2MDI1Mjk0fQ.UU5OAlj5rWVi-9iNWPaktAdikiyeQ5Uv3Zh-YjowyDc",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Coca cola\",\r\n    \"description\" : \"Coca de 500ml\",\r\n    \"price\" : 70,\r\n    \"imgSrc\" : \"imagendeunacoca\",\r\n    \"isAvailable\" : true\r\n}",
+					"raw": "{\r\n    \"name\" : \"Pizza Muzza\",\r\n    \"description\" : \"Pizza de muzza\",\r\n    \"price\" : 300,\r\n    \"imgSrc\" : \"imagendepizzamuzza\",\r\n    \"isAvailable\" : true\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -196,13 +196,13 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlck5hbWUiOiJtYXJ1ZGlheiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1OTU4Nzc4NzV9.A9akbJ7d_-fAwnT2ZiqYkD7V_VjoIZhHXWRR1PdAroI",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlck5hbWUiOiJwYXVkaWF6IiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTk2MDI1Mjk0fQ.UU5OAlj5rWVi-9iNWPaktAdikiyeQ5Uv3Zh-YjowyDc",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"paymentMethod\" : \"Efectivo\",\r\n    \"productsArray\" : [\r\n        {\r\n            \"id\": 2,\r\n\t\t\t\"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 1,\r\n\t\t\t\"quantity\": 2\r\n        },\r\n        {\r\n            \"id\": 4,\r\n\t\t\t\"quantity\": 1\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"paymentMethod\" : \"Tarjeta\",\r\n    \"productsArray\" : [\r\n        {\r\n            \"id\": 1,\r\n\t\t\t\"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 5,\r\n\t\t\t\"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 2,\r\n\t\t\t\"quantity\": 1\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
