@@ -17,7 +17,7 @@ Es recomendable también importar el archivo 'Delilah Resto.postman_collection.j
 4. Para ejecutar el servidor, ingrese el comando 'node server' en consola.
 
 ## Base de datos
-5. Abra http://localhost/phpmyadmin/ para ingresar al panel de control de MySQL e importe el archivo 'delilahresto.sql' para obtener una base de datos precargada.
+5. Abra http://localhost/phpmyadmin/ para ingresar al panel de control de MySQL e importe el archivo 'delilahresto.sql' para obtener una base de datos precargada (de ser necesario usuario, el mismo es 'root' y no posee contraseña).
 
 ## Todo listo!
 El proyecto está listo para ser probado!
