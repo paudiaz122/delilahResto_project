@@ -31,6 +31,19 @@ orders_middlewares.requireOrderStatus = (req, res, next) => {
     }
 };
 
+orders_middlewares.validateOrderId = async (req, res, next) => {
+    const order = await projectDatabase.ordersModel.findByPk(req.params.id);
+    
+    if(order) {
+        res.locals.order = order.id;
+        next();
+    } else {
+        res.status(404).json({
+            message: 'The order does not exist.'
+        });
+    }
+};
+
 orders_middlewares.isProductAvailable = async (req, res, next) => {
     const productsArray = req.body.productsArray;
     const productsIdArray = productsArray.map(product => product.id);

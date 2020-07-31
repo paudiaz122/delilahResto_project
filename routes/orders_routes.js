@@ -24,9 +24,18 @@ router.get('/',
 router.put('/:id',
     generalMiddlewares.validateToken,
     generalMiddlewares.isAdminUser,
+    orderMiddlewares.validateOrderId,
     generalMiddlewares.checkBody,
     orderMiddlewares.requireOrderStatus,
     orderControllers.modifyOrderStatus
+);
+
+//Acceso privado
+router.delete('/:id',
+    generalMiddlewares.validateToken,
+    generalMiddlewares.isAdminUser,
+    orderMiddlewares.validateOrderId,
+    orderControllers.deleteOrder
 );
 
 module.exports = router;

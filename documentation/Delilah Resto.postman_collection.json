@@ -279,6 +279,40 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "DELETE orders",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlck5hbWUiOiJ1c3VhcmlvSW52aXRhZG8xIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5NjE5NzkyOX0.PGu_RtlSuZJTvvJSFiSv5Rd1tD5awlOPxYES2gZfXYY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/orders/7",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"orders",
+						"7"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}

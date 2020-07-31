@@ -85,6 +85,17 @@ orders_controllers.modifyOrderStatus = async (req, res) => {
     });
 };
 
+orders_controllers.deleteOrder = async (req, res) => {
+    const deletedOrder = await projectDatabase.ordersModel
+    .destroy({ where: { id: res.locals.order } })
+    .catch(err => catchDatabaseEror(err, res));
+
+    res.status(200).json({
+        message: 'Order deleted.',
+        deletedOrder
+    });
+};
+
 //Funciones auxiliares
 const catchDatabaseEror = (err, res) => {
     res.status(500).json({

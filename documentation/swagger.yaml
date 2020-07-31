@@ -270,8 +270,37 @@ paths:
           description: "There was a problem with the information provided."
         "403":
           description: "Unable to verify the token/Permission denied."
+        "404":
+          description: "The order does not exist."
         "200":
           description: "Order updated."
+    delete:
+      tags:
+      - "orders"
+      summary: "Deletes the order."
+      description: "Deletes de order."
+      operationId: "deleteOrder"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Order id"
+        required: true
+        type: "number"
+      - name: "token"
+        in: "header"
+        description: "Token"
+        required: true
+        type: "string"
+      responses:
+        "403":
+          description: "Unable to verify the token/Permission denied."
+        "404":
+          description: "The order does not exist."
+        "200":
+          description: "Order deleted."
 definitions:
   User:
     type: "object"
